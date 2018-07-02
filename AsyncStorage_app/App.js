@@ -7,18 +7,27 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Button,
   AsyncStorage,
-  TextInput
+  TextInput,
+  Keyboard
 } from 'react-native';
 
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fname: '',
+      lname: ''
+    }
+  }
 
   saveData = () => {
-    alert("Data is Save")
+    const { fname, lname } = this.state;
+    Keyboard.dismiss();
+    alert(fname + " " + lname);
   }
 
   render() {
@@ -27,10 +36,12 @@ export default class App extends Component {
           <TextInput
             placeholder="First Name"
             style={styles.input}
+            onChangeText={fname=> this.setState({fname})}
           />
           <TextInput
             placeholder="Last Name"
             style={styles.input}
+            onChangeText={lname=> this.setState({lname})}
           />
           <Button 
             title="Save Data"
@@ -51,6 +62,8 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#fff',
     padding: 10,
-    margin: 10
+    margin: 10,
+    borderWidth: 1,
+    borderColor: '#ccc'
   }
 });
