@@ -26,8 +26,23 @@ export default class App extends Component {
 
   saveData = () => {
     const { fname, lname } = this.state;
+    
+    // Save Data in AsyncStorage 
+    let myArr = {
+      fname: fname,
+      lname: lname
+    }
+
+    AsyncStorage.setItem('myArr', JSON.stringify(myArr));
+
     Keyboard.dismiss();
-    alert(fname + " " + lname);
+    alert(fname + " " + lname + 'Data is save in localStorage Successfully');
+  }
+
+  getData = async () => {
+    let myArray = await AsyncStorage.getItem('myArr');
+    let data = JSON.parse(myArray);
+    alert(data.fname + '  ' + data.lname);
   }
 
   render() {
@@ -46,8 +61,15 @@ export default class App extends Component {
           <Button 
             title="Save Data"
             onPress={this.saveData}
-            color="green"
+            color= 'green'
           />
+          <View style={styles.getButton}>
+            <Button
+              title="Get Data"
+              onPress={this.getData}
+              color= 'blue'
+            />
+          </View>
       </View>
     );
   }
@@ -65,5 +87,8 @@ const styles = StyleSheet.create({
     margin: 10,
     borderWidth: 1,
     borderColor: '#ccc'
+  },
+  getButton: {
+    marginTop: 5
   }
 });
