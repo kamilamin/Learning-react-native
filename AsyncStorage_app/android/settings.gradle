@@ -1,0 +1,3 @@
+rootProject.name = 'AsyncStorage_app'
+
+include ':app'
