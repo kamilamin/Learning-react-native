@@ -1,0 +1,3 @@
+rootProject.name = 'RN_Drawer'
+
+include ':app'
